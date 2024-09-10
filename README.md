@@ -59,7 +59,8 @@ Monster短信服务系统的业务流程如下：
 | 优秀的go包使用 | 中间件：go-redis、gorm、kafka-go、mongo-driver<br/>web框架：grpc、gin<br/>命令行工具：cobra、pflag、viper<br/>认证：golang-jwt<br/>校验：go-playground/validator<br/>日志：zap<br/>定时任务：robfig/cron<br/>HTTP客户端：retry<br/>分布式锁：redsync<br/>授权：casbin |
 
 
-# 
+# 联系我
+- 邮箱：starry99c@163.com
 
 
 
