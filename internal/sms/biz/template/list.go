@@ -21,18 +21,17 @@ func (t *templateBiz) List(ctx context.Context, rq *v1.ListTemplateRequest) (*v1
 
 	var m sync.Map
 	eg, ctx := errgroup.WithContext(ctx)
-	for _, template := range list {
+	for _, item := range list {
 		eg.Go(func() error {
 			select {
 			case <-ctx.Done():
 				return ctx.Err()
 			default:
-				var t v1.TemplateReply
-				_ = copier.Copy(&t, template)
-				m.Store(template.ID, &v1.TemplateReply{
-					CreatedAt: template.CreatedAt.Format("2006-01-02 15:04:05"),
-					UpdatedAt: template.UpdatedAt.Format("2006-01-02 15:04:05"),
-				})
+				var templateReply v1.TemplateReply
+				_ = copier.Copy(templateReply, item)
+				templateReply.CreatedAt = item.CreatedAt.Format("2006-01-02 15:04:05")
+				templateReply.UpdatedAt = item.UpdatedAt.Format("2006-01-02 15:04:05")
+				m.Store(item.ID, templateReply)
 				return nil
 			}
 
@@ -67,12 +66,13 @@ func (t *templateBiz) ListWithBadPerformance(ctx context.Context, rq *v1.ListTem
 	templates := make([]*v1.TemplateReply, 0, len(list))
 
 	for _, item := range list {
-		var t v1.TemplateReply
-		_ = copier.Copy(&t, item)
-		templates = append(templates, &v1.TemplateReply{
-			CreatedAt: item.CreatedAt.Format("2006-01-02 15:04:05"),
-			UpdatedAt: item.UpdatedAt.Format("2006-01-02 15:04:05"),
-		})
+
+		var templateReply v1.TemplateReply
+		_ = copier.Copy(templateReply, item)
+		templateReply.CreatedAt = item.CreatedAt.Format("2006-01-02 15:04:05")
+		templateReply.UpdatedAt = item.UpdatedAt.Format("2006-01-02 15:04:05")
+
+		templates = append(templates, &templateReply)
 	}
 
 	log.C(ctx).Debugw("Get templates from backend storage", "count", len(templates))
