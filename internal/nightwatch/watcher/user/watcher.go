@@ -65,7 +65,7 @@ func (w *userWatcher) Run() {
 }
 
 // Init initializes the watcher for later execution.
-func (w *userWatcher) Init(ctx context.Context, config *watcher.Config) error {
+func (w *userWatcher) SetAggregateConfig(ctx context.Context, config *watcher.Config) error {
 	w.store = config.Store
 	w.maxWorkers = config.UserWatcherMaxWorkers
 	return nil

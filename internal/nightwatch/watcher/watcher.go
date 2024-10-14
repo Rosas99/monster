@@ -14,7 +14,7 @@ const (
 
 // Watcher is the interface for watchers. It use cron job as a scheduling engine.
 type Watcher interface {
-	Init(ctx context.Context, config *Config) error
+	SetAggregateConfig(ctx context.Context, config *Config) error
 	cron.Job
 }
 

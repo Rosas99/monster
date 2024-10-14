@@ -108,7 +108,12 @@ func (s PreparedServer) Run(stopCh <-chan struct{}) error {
 		return err
 	}
 	log.Infof("Successfully start pump server")
-	source.Via(filter).To(sink)
+	via := source.Via(filter)
+	outs := flow.FanOut(via, 2)
+	for _, out := range outs {
+		out.Via(filter).To(sink) // loyalty mq
+		out.Via(filter).To(sink) // cdp mq
+	}
 
 	return err
 }

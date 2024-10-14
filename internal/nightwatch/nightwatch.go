@@ -126,7 +126,7 @@ func (nw *nightWatch) addWatchers() error {
 			continue
 		}
 
-		if err := w.Init(context.Background(), nw.config); err != nil {
+		if err := w.SetAggregateConfig(context.Background(), nw.config); err != nil {
 			log.Errorw(err, "Failed to construct watcher", "watcher", n)
 			return err
 		}

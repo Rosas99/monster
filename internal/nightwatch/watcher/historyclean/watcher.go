@@ -39,8 +39,8 @@ func (w *historiesCleanWatcher) Run() {
 	}
 }
 
-// Init initializes the watcher for later execution.
-func (w *historiesCleanWatcher) Init(ctx context.Context, config *watcher.Config) error {
+// SetAggregateConfig initializes the watcher for later execution.
+func (w *historiesCleanWatcher) SetAggregateConfig(ctx context.Context, config *watcher.Config) error {
 	w.store = config.Store
 	return nil
 }
