@@ -10,6 +10,7 @@ import (
 
 const (
 	Every3Seconds = "@every 3s"
+	EveryDay      = "@daily"
 )
 
 // Watcher is the interface for watchers. It use cron job as a scheduling engine.

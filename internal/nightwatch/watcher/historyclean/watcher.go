@@ -16,6 +16,10 @@ type historiesCleanWatcher struct {
 	store store.Interface
 }
 
+func (w *historiesCleanWatcher) Spec() string {
+	return watcher.EveryDay
+}
+
 // Run runs the watcher.
 func (w *historiesCleanWatcher) Run() {
 	_, histories, err := w.store.Sms().Histories().List(context.Background())
